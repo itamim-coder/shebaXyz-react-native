@@ -1,3 +1,5 @@
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from "expo-status-bar";
 import {
   Image,
@@ -7,73 +9,67 @@ import {
   Text,
   View,
 } from "react-native";
-import Banner from "./components/banner";
-import Catagory from "./components/Catagory";
-import Discount from "./components/Discount";
-import TopBar from "./components/TopBar";
-import Trending from "./components/Trending";
+import Login from "./screen/Login";
+import Signup from "./screen/Signup";
+import { initializeApp } from "firebase/app";
+import Home from "./screen/Home";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Profile from "./screen/Profile";
 
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA4N3eOvMOPykorixuADG_GPX6W0NVCmEk",
+  authDomain: "sheba-xyz.firebaseapp.com",
+  projectId: "sheba-xyz",
+  storageBucket: "sheba-xyz.appspot.com",
+  messagingSenderId: "228861548778",
+  appId: "1:228861548778:web:fa16ddf7d681acdeb09f93"
+};
+
+const app = initializeApp(firebaseConfig);
+
+Entypo.loadFont();
+MaterialCommunityIcons.loadFont();
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const TabNavigator = () => {
+  return(
+    <Tab.Navigator 
+    
+    screenOptions={{
+      headerShown: false
+    }}
+    >
+      <Tab.Screen   name="Home" component={Home} options={{        
+      tabBarIcon: ({color})=> <Entypo name="home" size={32} color={color}/>
+      }}/>
+ 
+      <Tab.Screen name="Profile" component={Profile} options={{
+      tabBarIcon: ({color}) => <MaterialCommunityIcons name="account" size={32} color={color}/>
+      }}/>
+    </Tab.Navigator>
+  )
+} 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <TopBar></TopBar>
-      </View>
-      <ScrollView>
-        <View style={styles.banner}>
-          <Banner></Banner>
-        </View>
-        <View style={styles.catagory}>
-          <Catagory></Catagory>
-        </View>
-        <View>
-          <Discount></Discount>
-        </View>
-        <View>
-          <Trending></Trending>
-        </View>
-        <View style={styles.banner}>
-          <Banner></Banner>
-        </View>
-        <View>
-          <Image
-            style={{
-              width: 350,
-              height: 100,
-              marginLeft: 20,
-              marginBottom: 20,
-              justifyContent: "center",
-            }}
-            source={require("../sheba/assets/286033848_3236833093305034_8208002980877506417_n.jpg")}
-          ></Image>
-          <Image
-            style={{
-              width: 350,
-              height: 100,
-              marginLeft: 20,
-              marginBottom: 20,
-              justifyContent: "center",
-            }}
-            source={require("../sheba/assets/286033848_3236833093305034_8208002980877506417_n.jpg")}
-          ></Image>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{header: () => null}}>
+     
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Signup" component={Signup} />
+        {/* <Stack.Screen name="Home" component={Home} /> */}
+        <Stack.Screen name="TabNavigator" component={TabNavigator}  />
+      
+
+      </Stack.Navigator>
+  </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  banner: {
-    // marginLeft: 10,
-    // marginRight: 10,
-  },
-  catagory: {
-    marginTop: 30,
-    marginLeft: 10,
-    marginRight: 10,
-  },
+
 });
