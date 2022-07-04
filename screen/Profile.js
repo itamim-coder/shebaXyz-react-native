@@ -22,7 +22,7 @@ const Profile = ({ navigation }) => {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        // navigation.replace("Login");
+        navigation.replace("Login");
       })
       .catch((error) => {
         // An error happened.

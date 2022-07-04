@@ -8,7 +8,11 @@ import {
 } from "react-native";
 import React from "react";
 
+import { useNavigation } from "@react-navigation/native";
+
 const Trending = () => {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView>
       <View
@@ -27,36 +31,36 @@ const Trending = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.trending}>
-        <View>
+        <TouchableOpacity onPress={() => navigation.navigate("Painting")}>
           <Image
             style={styles.trendingImg}
             source={require("../assets/1612862065_paintingservices_270x180.webp")}
           ></Image>
           <Text style={styles.trendingTxt}>Painting</Text>
-        </View>
-        <View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Cleaning")}>
           <Image
             style={styles.trendingImg}
             source={require("../assets/1617855940_homecleaning_270x180.webp")}
           ></Image>
           <Text style={styles.trendingTxt}>Home Cleaning</Text>
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.trending}>
-        <View>
+        <TouchableOpacity onPress={() => navigation.navigate("Pest")}>
           <Image
             style={styles.trendingImg}
             source={require("../assets/1617856509_pestcontrolservice_270x180.webp")}
           ></Image>
           <Text style={styles.trendingTxt}>Pest Control</Text>
-        </View>
-        <View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Plumbing")}>
           <Image
             style={styles.trendingImg}
             source={require("../assets/1619428672_plumbingsanitaryservices_270x180.webp")}
           ></Image>
           <Text style={styles.trendingTxt}>Plumbing</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
