@@ -36,7 +36,7 @@ const Painting = () => {
         <View style={styles.paintBox}>
           <TouchableOpacity
             style={styles.box}
-            onPress={() => navigation.navigate("PaintingDetails", { item })}
+            onPress={() => navigation.navigate("Details", { item })}
           >
             <Image style={styles.trendingImg} source={{ uri: image }}></Image>
             <Text style={styles.trendingTxt}>{name}</Text>
