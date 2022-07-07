@@ -1,4 +1,5 @@
 import {
+  FlatList,
   Image,
   SafeAreaView,
   StyleSheet,
@@ -8,9 +9,11 @@ import {
 } from "react-native";
 import React from "react";
 
+
 import { useNavigation } from "@react-navigation/native";
 
 const Trending = () => {
+
   const navigation = useNavigation();
 
   return (
@@ -31,14 +34,22 @@ const Trending = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.trending}>
-        <TouchableOpacity onPress={() => navigation.navigate("Painting")}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("CategoryFilter", "painting");
+          }}
+        >
           <Image
             style={styles.trendingImg}
             source={require("../assets/1612862065_paintingservices_270x180.webp")}
           ></Image>
           <Text style={styles.trendingTxt}>Painting</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Cleaning")}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("CategoryFilter", "cleaning");
+          }}
+        >
           <Image
             style={styles.trendingImg}
             source={require("../assets/1617855940_homecleaning_270x180.webp")}

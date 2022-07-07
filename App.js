@@ -13,9 +13,7 @@ import Profile from "./screen/Profile";
 import { getFirestore } from "firebase/firestore";
 import Details from "./screen/Details";
 
-import Painting from "./screen/painting";
-
-import Cleaning from "./screen/Cleaning";
+import CategoryFilter from "./screen/CategoryFilter";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA4N3eOvMOPykorixuADG_GPX6W0NVCmEk",
@@ -73,9 +71,8 @@ export default function App() {
 
         <Stack.Screen name="TabNavigator" component={TabNavigator} />
         <Stack.Screen name="Details" component={Details} />
-        <Stack.Screen name="Painting" component={Painting} />
-        {/* <Stack.Screen name="PaintingDetails" component={PaintingDetails} /> */}
-        <Stack.Screen name="Cleaning" component={Cleaning} />
+        <Stack.Screen name="CategoryFilter" component={CategoryFilter} />
+      
       </Stack.Navigator>
     </NavigationContainer>
   );

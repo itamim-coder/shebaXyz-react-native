@@ -1,5 +1,4 @@
 import {
-  Button,
   FlatList,
   Image,
   SafeAreaView,
@@ -9,26 +8,33 @@ import {
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { query, onSnapshot, collection } from "firebase/firestore";
+import { query, onSnapshot, collection, where } from "firebase/firestore";
 import { db } from "../App";
 import { useNavigation } from "@react-navigation/native";
+import { category } from "../components/Trending";
 
-const Cleaning = () => {
+const CategoryFilter = (props) => {
+  const category = props.route.params;
+  const [filterData, setFilterData] = useState([]);
   const navigation = useNavigation();
-  const [cleaning, setCleaning] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "cleaning"));
-
-    const cleaningListener = onSnapshot(q, (querySnapshot) => {
+    console.log(category);
+    const q = query(
+      collection(db, "services"),
+      where("category", "==", category)
+    );
+    const filterListener = onSnapshot(q, (querySnapshot) => {
       const list = [];
       querySnapshot.forEach((doc) => {
         list.push(doc.data());
       });
-      setCleaning(list);
+      setFilterData(list);
     });
-    return cleaningListener;
-  }, []);
+    return filterListener;
+  }, [category]);
+
+  console.log(filterData);
 
   const renderItem = ({ item }) => {
     const { name, image } = item;
@@ -45,7 +51,6 @@ const Cleaning = () => {
           <TouchableOpacity>
             <Text style={styles.nav}>Details</Text>
           </TouchableOpacity>
-          
         </View>
       </SafeAreaView>
     );
@@ -54,15 +59,15 @@ const Cleaning = () => {
   return (
     <SafeAreaView>
       <FlatList
-        data={cleaning}
+        data={filterData}
         renderItem={renderItem}
-        contentContainerStyle={{ paddingTop: 50 }}
+        contentContainerStyle={{ marginTop: 50 }}
       ></FlatList>
     </SafeAreaView>
   );
 };
 
-export default Cleaning;
+export default CategoryFilter;
 
 const styles = StyleSheet.create({
   paintBox: {
